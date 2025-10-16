@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Custom AI Agent - Spryzen AI</title>
+    <!-- Reusing the same styles for consistency -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8F8F8; }
+        .gradient-bg {
+            background: linear-gradient(90deg, #4f00bc, #a855f7, #f97316);
+            background-size: 200% 200%;
+            animation: gradient-animation 20s ease infinite alternate;
+        }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- The header is identical to the homepage for consistent navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="border-t-2 border-gray-200">
+                <nav class="flex justify-between items-center pt-3">
+                    <div class="flex-1 flex justify-start">
+                        <a href="index.html" class="text-xl font-bold tracking-wider text-gray-900">SPRYZEN AI.</a>
+                    </div>
+                    <div class="hidden md:flex justify-center">
+                        <div class="flex items-center space-x-6">
+                            <a href="../index.html#home" class="text-gray-600 hover:text-purple-600 transition-colors px-3 py-2 rounded-md">Home</a>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex justify-end">
+                        <div class="md:hidden">
+                            <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 text-center">
+             <a href="index.html#home" class="block text-gray-600 hover:text-purple-600 transition-colors py-2">Home</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="py-24">
+            <div class="container mx-auto px-6 flex flex-col items-center">
+                <div class="text-center max-w-2xl">
+                    <h1 class="text-4xl font-bold mb-4">Automate AI Agent Creation</h1>
+                    <p class="text-gray-600 mb-8">Enter your n8n instance details below. After you complete a purchase, we will automatically create the selected AI Agent workflow directly in your account. Your credentials are sent securely and are not stored.</p>
+                </div>
+
+                <form id="n8n-form" class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+                    <!-- This div is for displaying success or error messages back to the user -->
+                    <div id="form-status" class="mb-6 hidden"></div>
+
+                    <div class="mb-5">
+                        <label for="n8n-url" class="block text-gray-700 text-sm font-bold mb-2">n8n Instance URL</label>
+                        <input type="url" id="n8n-url" placeholder="https://my-instance.n8n.cloud" class="shadow-inner appearance-none border border-gray-300 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                    </div>
+                    <div class="mb-8">
+                        <label for="n8n-api-key" class="block text-gray-700 text-sm font-bold mb-2">n8n API Key</label>
+                        <input type="password" id="n8n-api-key" placeholder="••••••••••••••••••••••••" class="shadow-inner appearance-none border border-gray-300 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                         <p class="text-xs text-gray-500 mt-2">Find this in your n8n account under Settings > API.</p>
+                    </div>
+
+                    <div class="flex items-center justify-center">
+                        <button type="submit" id="submit-button" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-10 rounded-lg focus:outline-none focus:shadow-outline transition-colors w-full">
+                            Create My AI Agent
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 SPRYZEN AI. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Handle the form submission
+            const n8nForm = document.getElementById('n8n-form');
+            const submitButton = document.getElementById('submit-button');
+            const formStatus = document.getElementById('form-status');
+
+            n8nForm.addEventListener('submit', async (event) => {
+                // Prevent the default form submission which reloads the page
+                event.preventDefault();
+
+                // Show loading state
+                submitButton.disabled = true;
+                submitButton.textContent = 'Creating...';
+                formStatus.classList.add('hidden');
+
+                // Get form data
+                const n8nUrl = document.getElementById('n8n-url').value;
+                const n8nApiKey = document.getElementById('n8n-api-key').value;
+
+                try {
+                    // Send the data to our secure serverless function
+                    // The endpoint '/.netlify/functions/create-n8n-workflow' is automatically created by Netlify
+                    const response = await fetch('/.netlify/functions/create-n8n-workflow', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ n8nUrl, n8nApiKey }),
+                    });
+
+                    const result = await response.json();
+
+                    if (!response.ok) {
+                        // If the serverless function returned an error, display it
+                        throw new Error(result.message || 'An unknown error occurred.');
+                    }
+
+                    // Display success message
+                    formStatus.innerHTML = `<div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded" role="alert"><p class="font-bold">Success!</p><p>Your AI Agent workflow has been created in your n8n account.</p></div>`;
+
+                } catch (error) {
+                    // Display error message
+                    formStatus.innerHTML = `<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded" role="alert"><p class="font-bold">Error</p><p>${error.message}</p></div>`;
+                } finally {
+                    // Restore button state
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Create My AI Agent';
+                    formStatus.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spryzen AI - From Friction to Flow</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to match Figma design */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F8F8; /* Set a light grey background as per design */
+        }
+
+        /* MODIFICATION: Enhanced gradient background with a smooth animation */
+        .gradient-bg {
+            background: linear-gradient(90deg, #4f00bc, #a855f7, #f97316);
+            background-size: 200% 200%; /* Increased background size to allow for movement */
+            animation: gradient-animation 20s ease infinite alternate; /* Apply the animation */
+        }
+
+        /* NEW: Keyframes for the gradient animation */
+        @keyframes gradient-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Styles for scroll-triggered animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header Section -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md">
+        <div class="container mx-auto px-6 py-4">
+            <!-- Top border line as in Figma -->
+            <div class="border-t-2 border-gray-200">
+                <!-- The navigation structure is updated to center the menu links on desktop. -->
+                <nav class="flex justify-between items-center pt-3">
+                    <!-- Left Side: Brand Logo -->
+                    <div class="flex-1 flex justify-start">
+                        <a href="#" class="text-xl font-bold tracking-wider text-gray-900">SPRYZEN AI.</a>
+                    </div>
+
+                    <!-- Center: Navigation Links (visible on desktop) -->
+                    <div class="hidden md:flex justify-center">
+                        <div class="flex items-center space-x-6">
+                            <a href="#home" class="text-gray-600 hover:text-purple-600 transition-colors px-3 py-2 rounded-md">Home</a>
+                            <a href="feature.html" class="active text-gray-600 hover:text-purple-600 transition-colors px-3 py-2 rounded-md">Features</a>
+                            <a href="pricing.html" class="text-gray-600 hover:text-purple-600 transition-colors px-3 py-2 rounded-md">Pricing</a>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Serves as a spacer on desktop and holds the mobile menu button on mobile -->
+                    <div class="flex-1 flex justify-end">
+                        <div class="md:hidden">
+                            <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 text-center">
+            <a href="#home" class="block text-gray-600 hover:text-purple-600 transition-colors py-2">Home</a>
+            <a href="feature.html" class="block text-gray-600 hover:text-purple-600 transition-colors py-2">Features</a>
+            <a href="pricing.html" class="block text-gray-600 hover:text-purple-600 transition-colors py-2">Pricing</a>
+            <a href="custom-ai-agent.html" class="block text-gray-600 hover:text-purple-600 transition-colors py-2">Custom Agents</a>
+        </div>
+    </header>
+
+    <main id="home">
+        <!-- Hero Section -->
+        <section class="py-24 md:py-32">
+            <div class="container mx-auto px-6 flex justify-end"> <!-- Changed to flex and justify-end -->
+                </div>
+            </div>
+            <!-- Icon below the main content box -->
+            <div class="text-center mt-16">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Gradient Feature Section with Floating Cards -->
+        <section class="gradient-bg py-32 relative overflow-hidden">
+            <div class="container mx-auto px-6">
+                <!-- Grid for card layout, responsive for different screen sizes -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 relative z-10">
+                    <!-- Feature Card 1 -->
+                    <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300">
+                        <h3 class="font-bold text-lg mb-2">AI agents don't take chai breaks</h3>
+                        <p class="text-gray-600 text-sm">Every business has friction points. We identify them, design a bespoke AI solution, and deploy an agent that works seamlessly within your existing ecosystem.</p>
+                    </div>
+                    <!-- Feature Card 2 -->
+                    <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300 md:mt-16">
+                         <h3 class="font-bold text-lg mb-2">Innovate. Automate. Celebrate.</h3>
+                        <p class="text-gray-600 text-sm">Our mission is to empower businesses to reach their full potential by removing the mundane and amplifying human creativity.</p>
+                    </div>
+                    <!-- Feature Card 3 -->
+                    <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300 md:col-span-2 lg:col-span-1 lg:mt-8">
+                         <h3 class="font-bold text-lg mb-2">AI Agent That Turns Chaos to Conquest</h3>
+                        <p class="text-gray-600 text-sm">Think of your workflow as a sports car. Our agents are the perfect pit crew, managing data and streamlining every single process.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- "SPRYZEN MEANS" Section -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-3 gap-12 items-start">
+                    <div class="md:col-span-1">
+                        <h2 class="text-2xl font-black tracking-widest uppercase">SPRYZEN MEANS:</h2>
+                    </div>
+                    <!-- MODIFICATION: "Explore" button links to feature.html -->
+                    <div class="md:col-span-2 space-y-6">
+                        <div class="scroll-animate border-t border-gray-300 pt-4">
+                            <h3 class="text-xl font-bold">From Friction To Flow</h3>
+                        </div>
+                        <div class="scroll-animate border-t border-gray-300 pt-4">
+                            <h3 class="text-xl font-bold">Design Custom AI Agents</h3>
+                        </div>
+                        <div class="scroll-animate border-t border-gray-300 pt-4">
+                            <h3 class="text-xl font-bold">Support Slayer</h3>
+                        </div>
+                        <div class="scroll-animate border-t border-b border-gray-300 py-4">
+                            <h3 class="text-xl font-bold">Turn Challenges Into Triumphs</h3>
+                        </div>
+                        <div class="pt-6">
+                            <a href="feature.html" class="inline-block bg-purple-600 text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-purple-700 transition-colors transform hover:scale-105">
+                                Explore
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA (Call to Action) Section -->
+        <section class="gradient-bg py-32 relative overflow-hidden">
+            <!-- Decorative Circles for visual effect -->
+            <div class="absolute -top-20 -left-20 w-64 h-64 bg-white/10 rounded-full opacity-50"></div>
+            <div class="absolute -bottom-24 -right-10 w-80 h-80 bg-white/10 rounded-full opacity-50"></div>
+            <div class="absolute top-1/2 left-1/4 w-32 h-32 bg-white/5 rounded-full opacity-50"></div>
+
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h2 class="text-4xl md:text-4xl font-bold text-white leading-tight mb-8">
+                    We Create <br> Bespoke AI Agents <br> For Visionary Businesses.
+                </h2>
+                <!-- MODIFICATION: Custom Agents button with hierarchy, centered at the bottom and linked to custom-ai-agent.html -->
+                <div class="flex justify-center mt-16">
+                    <a href="css/custom-ai-agent.html"
+                       class="inline-block bg-purple-600 text-white font-extrabold text-2xl px-10 py-5 rounded-full shadow-xl hover:bg-purple-700 transition-colors transform hover:scale-105 border-4 border-white"
+                       style="letter-spacing: 2px;">
+                        Custom Agents
+                    </a>
+                </div>
+                <p class="mt-6 text-white text-lg font-medium opacity-80">
+                    Discover how tailored automation can transform your workflow.
+                </p>
+            </div>
+        </section>
+
+        <!-- Sign Up Form Section -->
+        <section class="py-24">
+            <div class="container mx-auto px-6 flex flex-col items-center">
+                <h2 class="text-4xl font-bold mb-10">Sign Up</h2>
+                <form class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+                    <div class="mb-5">
+                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                        <input type="text" id="name" class="shadow-inner appearance-none border border-gray-300 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    </div>
+                    <div class="mb-5">
+                        <label for="surname" class="block text-gray-700 text-sm font-bold mb-2">Surname</label>
+                        <input type="text" id="surname" class="shadow-inner appearance-none border border-gray-300 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    </div>
+                    <div class="mb-5">
+                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                        <input type="email" id="email" class="shadow-inner appearance-none border border-gray-300 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    </div>
+                    <div class="mb-8">
+                        <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message</label>
+                        <textarea id="message" rows="4" class="shadow-inner appearance-none border border-gray-300 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <button type="submit" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-10 rounded-lg focus:outline-none focus:shadow-outline transition-colors">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer Section -->
+    <footer class="bg-gray-400 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 SPRYZEN AI. All Rights Reserved.</p>
+        </div>
+    </footer>
+                </button>
+            </div>
+        </section>
+
+    <script>
+        // MODIFICATION: Combined all scripts into one DOMContentLoaded listener for efficiency.
+        document.addEventListener('DOMContentLoaded', () => {
+            // JavaScript for mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // NEW: JavaScript for scroll-triggered animations
+            const animatedItems = document.querySelectorAll('.scroll-animate');
+
+            // Use Intersection Observer for performance
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    // When the element is in view
+                    if (entry.isIntersecting) {
+                        // Set a staggered delay for each item to appear one by one
+                        entry.target.style.transitionDelay = `${index * 150}ms`;
+                        // Add the 'is-visible' class to trigger the animation
+                        entry.target.classList.add('is-visible');
+                        // Stop observing the element after it has animated once
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1 // Animation triggers when 10% of the item is visible
+            });
+
+            // Observe each of the animatable items
+            animatedItems.forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+    <!-- Middle-left branding: headline and subheadline -->
+<div style="position: absolute; top: 50%; left: 32px; transform: translateY(-50%); text-align: left; z-index: 50;">
+  <span style="font-size: 48px; font-weight: bold; color: #4f00bc; font-family: 'Inter', sans-serif;">
+    SpryzenAI
+  </span>
+  <br>
+  <span style="font-size: 24px; color: #333; font-family: 'Inter', sans-serif; display: inline-block; max-width: 340px;">
+    where vision meets automation.
+  </span>
+</div>
+
+<!-- Middle-right context box: professional & premium look -->
+<div style="position: absolute; top: 50%; right: 32px; transform: translateY(-50%); z-index: 50;">
+  <div style="
+    background: linear-gradient(90deg, #fff 80%, #f3e8ff 100%);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(79,0,188,0.12), 0 2px 8px rgba(0,0,0,0.06);
+    padding: 32px 40px;
+    min-width: 340px;
+    max-width: 420px;
+    border: 1.5px solid #e5e7eb;
+    font-family: 'Inter', sans-serif;
+    ">
+    <p style="font-size: 1.15rem; color: #4f00bc; font-weight: 500; margin-bottom: 0;">
+      Transform your business with SPRYZEN Solutions. Our custom AI agents, powered by n8n, streamline operations and boost results for global brands.
+    </p>
+  </div>
+</div>
+
+

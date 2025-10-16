@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SPRYZEN — Features</title>
+  <meta name="description" content="Features of SPRYZEN AI Agents" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Embedded CSS for a single-file solution -->
+  <style>
+    /* ============================================ */
+    /* SETUP & GLOBALS             */
+    /* ============================================ */
+    :root {
+      --primary-color: #6d28d9; /* Deep Purple from icons */
+      --secondary-color: #4F46E5; /* Indigo from gradient */
+      --text-dark: #1a1a1a;
+      --text-light: #555;
+      --text-muted: #888;
+      --bg-light: #f9f9f9;
+      --bg-white: #ffffff;
+      --border-color: #e0e0e0;
+      --shadow-color: rgba(0, 0, 0, 0.07);
+
+      --font-family: 'Inter', sans-serif;
+      --border-radius: 20px; /* Matched from Figma */
+      --wrap-width: 1120px;
+      --transition-speed: 0.3s;
+    }
+
+    /* --- Base & Reset --- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-white);
+      color: var(--text-light);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* --- Typography & Layout --- */
+    .wrap {
+      max-width: var(--wrap-width);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    p.lead {
+      font-size: 1.25rem;
+      text-align: center;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto 4rem auto;
+    }
+
+    h1, h2, h3 {
+      color: var(--text-dark);
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color var(--transition-speed) ease;
+    }
+    a:hover {
+      color: var(--secondary-color);
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    .btn-primary:hover {
+      background-color: var(--secondary-color);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(109, 40, 217, 0.3);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-dark);
+      border: 1px solid var(--border-color);
+    }
+    .btn-ghost:hover {
+      background: var(--bg-light);
+      border-color: var(--text-muted);
+    }
+
+    /* ============================================ */
+    /* HEADER & NAV                */
+    /* ============================================ */
+    .site-header {
+      padding: 20px 0;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      background-color: var(--text-dark);
+      color: white;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .brand-title {
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav a {
+      color: var(--text-light);
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 6px;
+      position: relative;
+    }
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: width var(--transition-speed) ease;
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav a.active {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+    }
+    .nav a.active::after {
+      width: 0;
+    }
+
+    .hamburger { display: none; }
+
+    /* ============================================ */
+    /* HERO (Features Version)     */
+    /* ============================================ */
+    .hero-slim {
+      padding: 60px 0;
+      text-align: center;
+    }
+    .hero-slim .section-title .gradient-text {
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ============================================ */
+    /* FEATURES CARDS SECTION      */
+    /* ============================================ */
+    .grid {
+      display: grid;
+      gap: 30px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+      background-color: var(--bg-light);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      box-shadow: 0 4px 20px var(--shadow-color);
+      transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature {
+      position: relative;
+      padding-top: 50px; /* Space for the pseudo-element icons */
+    }
+
+    .feature h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    /* --- Generating the circle icons with ::before pseudo-elements --- */
+    .feature::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: currentColor; /* Base color is set by card-specific styles */
+      box-shadow: 18px 0 0, 36px 0 0, 54px 0 0; /* Creates 3 clones */
+    }
+
+    /* --- Set colors for each feature card's icon --- */
+    .feature.color-purple { color: #6d28d9; }
+    .feature.color-blue { color: #1e3a8a; }
+    .feature.color-orange { color: #b45309; }
+    .feature.color-magenta { color: #9d174d; }
+    
+    /* Apply opacity to the "clones" to mimic the Figma design */
+    .feature::before {
+      box-shadow:
+        18px 0 0 color-mix(in srgb, currentColor 80%, transparent),
+        36px 0 0 color-mix(in srgb, currentColor 60%, transparent),
+        54px 0 0 color-mix(in srgb, currentColor 40%, transparent);
+    }
+
+    /* ============================================ */
+    /* ACCORDION                   */
+    /* ============================================ */
+    .accordion-item {
+      border-bottom: 1px solid var(--border-color);
+    }
+    .accordion-header {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 20px 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-dark);
+    }
+    .accordion-header::after {
+      content: '+';
+      font-size: 2rem;
+      font-weight: 300;
+      transition: transform var(--transition-speed) ease;
+    }
+    .accordion-item.active .accordion-header::after {
+      transform: rotate(45deg);
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    }
+    .accordion-content p {
+        padding: 0 0 0 0;
+    }
+    .accordion-item.active .accordion-content {
+        padding-bottom: 20px;
+    }
+
+    /* ============================================ */
+    /* OTHER SECTIONS & FOOTER     */
+    /* ============================================ */
+    .case-strip .card, .contact-footer .card {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .case-card h3 { font-size: 1.8rem; }
+    .muted { color: var(--text-muted); }
+    .case-actions { margin-top: 20px; }
+
+    .contact-footer h3 { font-size: 2rem; }
+    .contact-footer p { margin-bottom: 30px; }
+
+    form { display: flex; flex-direction: column; gap: 15px; }
+    .field input, .field textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-family: var(--font-family);
+      font-size: 1rem;
+    }
+    .field textarea { min-height: 100px; resize: vertical; }
+
+    .site-footer {
+      background-color: var(--bg-light);
+      padding: 30px 0;
+      border-top: 1px solid var(--border-color);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand.small .logo { width: 30px; height: 30px; font-size: 0.9rem; }
+
+    /* ============================================ */
+    /* ANIMATIONS                  */
+    /* ============================================ */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      opacity: 0;
+    }
+
+    .fade-in.is-visible {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    /* ============================================ */
+    /* RESPONSIVE                  */
+    /* ============================================ */
+    @media (max-width: 900px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 24px; height: 24px;
+        background: transparent; border: none;
+        cursor: pointer; padding: 0; z-index: 10;
+      }
+      .hamburger span {
+        width: 24px; height: 2px; background: var(--text-dark);
+        border-radius: 10px; transition: all 0.3s linear;
+        position: relative; transform-origin: 1px;
+      }
+      
+      .section-title { font-size: 2.5rem; }
+      .footer-inner { flex-direction: column; gap: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#">
+        <div class="logo">SN</div>
+        <div class="brand-text">
+          <div class="brand-title">SPRYZEN</div>
+          <div class="brand-sub">AI Automation</div>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="#" class="active">Features</a>
+        <a href="pricing.html">Pricing</a>
+        <button class="btn btn-ghost" onclick="document.getElementById('contactFormFeatures').scrollIntoView()">Start Pilot</button>
+      </nav>
+
+      <button id="mobileMenuBtnFeatures" class="hamburger" aria-label="open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap hero-slim fade-in" data-delay="0">
+      <h1 class="section-title">Features Of <span class="gradient-text">AI AGENTS</span></h1>
+      <p class="lead">Discover what our AI agents can do — modular, customizable, scalable.</p>
+    </section>
+
+    <section id="capabilities" class="wrap section fade-in" data-delay="120">
+      <div class="grid grid-2">
+        <article class="card feature color-purple">
+          <h3>From Friction To Flow</h3>
+          <p>Every business has friction points. We identify them, design a bespoke AI solution, and deploy an agent that works seamlessly within your existing ecosystem. The result? A perfectly optimized workflow.</p>
+        </article>
+        <article class="card feature color-blue">
+          <h3>Design Custom AI Agents</h3>
+          <p>We're a team of innovators and creators who believe AI should be a partner, not a replacement. Our mission is to empower businesses to reach their full potential by removing the mundane and amplifying human creativity.</p>
+        </article>
+        <article class="card feature color-orange">
+          <h3>Support Slayer</h3>
+          <p>Meet the Support Slayer—your ninja that zaps 70% of inquiries faster than a repulsor blast, saving 20 hours a week. Your customers get instant, personalized magic via Webhooks and AI smarts.</p>
+        </article>
+        <article class="card feature color-magenta">
+          <h3>Turn Challenges Into Triumphs</h3>
+          <p>We design and build custom AI Agents to automate complexity and unlock a new level of efficiency.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="modules" class="wrap section fade-in" data-delay="220">
+      <h2 class="section-title">Modules & Extensions</h2>
+      <div class="accordion" id="modulesAccord">
+        <div class="accordion-item">
+          <button class="accordion-header">AI agents don't take chai breaks</button>
+          <div class="accordion-content"><p>Every business has friction points. We identify them, design a bespoke AI solution, and deploy an agent that works seamlessly within your existing ecosystem.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header">Innovate. Automate. Celebrate.</button>
+          <div class="accordion-content"><p>Our mission is to empower businesses to reach their full potential by removing the mundane and amplifying human creativity.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header">AI Agent That Turns Chaos to Conquest</button>
+          <div class="accordion-content"><p>Think of your workflow as a sports car. Our agents are the perfect pit crew, managing data and streamlining every single process.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section case-strip fade-in" data-delay="320">
+      <div class="case-card card">
+        <h3>Example Impact</h3>
+        <p class="muted">“Client X reduced manual lead handling by 65% and doubled demo bookings within one month.”</p>
+        <div class="case-actions"><a class="btn btn-primary" href="#">See Pricing & Pilot</a></div>
+      </div>
+    </section>
+
+    <section id="contactFormFeatures" class="wrap section contact-footer fade-in" data-delay="420">
+      <div class="card">
+        <h3>Request a Feature Pilot</h3>
+        <p class="muted">Tell us which modules you need and we'll propose a custom pilot.</p>
+        <form name="feature-lead" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="feature-lead" />
+          <label class="field"><input type="text" name="name" placeholder="Name" required /></label>
+          <label class="field"><input type="email" name="email" placeholder="Email" required /></label>
+          <label class="field"><textarea name="message" placeholder="Which feature/module?" required></textarea></label>
+          <div class="form-actions"><button class="btn btn-primary" type="submit">Request Pilot</button></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="brand small"><div class="logo small">SN</div><div class="brand-sub muted">StartNow — AI Automation</div></div>
+      <div class="muted">© 2025 SPRYZEN. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Embedded JavaScript for interactivity and animations -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // --- Staggered Fade-in Animation on Scroll ---
+      const fadeInElements = document.querySelectorAll('.fade-in');
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+              entry.target.classList.add('is-visible');
+            }, parseInt(delay));
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      fadeInElements.forEach(el => {
+        observer.observe(el);
+      });
+
+      // --- Accordion Functionality ---
+      const accordionItems = document.querySelectorAll('.accordion-item');
+
+      accordionItems.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        const content = item.querySelector('.accordion-content');
+
+        header.addEventListener('click', () => {
+          // Close other accordion items
+          accordionItems.forEach(otherItem => {
+            if (otherItem !== item && otherItem.classList.contains('active')) {
+              otherItem.classList.remove('active');
+              otherItem.querySelector('.accordion-content').style.maxHeight = null;
+            }
+          });
+
+          // Toggle the clicked item
+          item.classList.toggle('active');
+          if (item.classList.contains('active')) {
+            content.style.maxHeight = content.scrollHeight + 'px';
+          } else {
+            content.style.maxHeight = null;
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
